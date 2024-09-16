@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581756819357",
+    "project_id": "ernu-project",
+    "storage_bucket": "ernu-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581756819357:android:880cddfb58fdb22bfec174",
+        "android_client_info": {
+          "package_name": "com.titi.ern_u"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBYAgLkIiHZkODNnWgCZc9r6sDfRiEA3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
