@@ -13,6 +13,8 @@ import 'auth_widgets/text_form_field.dart';
 import 'firebase_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -90,12 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           const SizedBox(height: 8),
                           PrimaryTextFormField(
-                              // validator: (value) {
-                              //   if (value == null || value.isEmpty) {
-                              //     return 'required';
-                              //   }
-                              //   return null;
-                              // },
+
                               borderRadius: BorderRadius.circular(24),
                               hintText: 'John',
                               controller: firstName,
@@ -121,12 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 8,
                           ),
                           PrimaryTextFormField(
-                              // validator: (value) {
-                              //   if (value == null || value.isEmpty) {
-                              //     return 'required';
-                              //   }
-                              //   return null;
-                              // },
+
                               borderRadius: BorderRadius.circular(24),
                               hintText: 'Doe',
                               controller: listName,
@@ -155,14 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 7),
                       PrimaryTextFormField(
-                          // validator: (value) {
-                          //   if (value == null || value.isEmpty) {
-                          //     return 'required';
-                          //   } else if (!value.contains("@")) {
-                          //     return 'Email does not contain @';
-                          //   }
-                          //   return null;
-                          // },
+
                           borderRadius: BorderRadius.circular(24),
                           hintText: 'john.doe@gmail.com',
                           controller: emailC,
@@ -217,10 +202,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Column(
                     children: [
                       PrimaryButton(
-                        elevation: 0,
+                        elevation: 5,
                         onTap: () async {
-
-                          if (_formKey.currentState!.validate()) {
 
                             setState(() {
                               isLoading = true;
@@ -234,11 +217,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 passwordC.text,
                               );
 
-                              // Handle successful registration
-                              Get.snackbar(
-                                  'Success', 'Account created successfully'
-                              );
-                              Get.to(() => LoginScreen());
                             } catch (e) {
                               // Handle errors
                               Get.snackbar(
@@ -248,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 isLoading = false;
                               });
                             }
-                          }
+
                         },
                         text: 'Create Account',
                         bgColor: AppColor.kPrimary,
