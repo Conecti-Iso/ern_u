@@ -15,4 +15,6 @@ class AppColor {
 
   // onbording title color
   static Color kGrayscaleDark100 = const Color(0XFF1C1C1E);
+  static Color kSuccessColor = Colors.green;
+  static Color kErrorColors = Colors.redAccent;
 }
