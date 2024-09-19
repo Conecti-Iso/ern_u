@@ -1,4 +1,5 @@
 import 'package:ern_u/constants/app_colors.dart';
+import 'package:ern_u/news_pages/news_tabs.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page.dart';
@@ -14,6 +15,7 @@ class _NavigationHomeState extends State<NavigationHome> {
   int currentIndex = 0;
   List<Widget> screens = [
     HomePage(),
+    const NewsTabs(),
     // MyOrders(),
   ];
 
@@ -60,8 +62,8 @@ class _NavigationHomeState extends State<NavigationHome> {
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(Icons.person, color: Colors.blue),
                   )
-                : const Icon(Icons.person),
-            label: 'Profile',
+                : const Icon(Icons.newspaper, color: Colors.blue),
+            label: 'News',
           ),
         ],
       ),

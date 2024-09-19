@@ -28,7 +28,7 @@ Widget newsCard(NewsModel model, double width) {
                 children: [
                   Row(children: [
                     Icon(Icons.person, size: 20, color: Colors.amber,),
-                    SizedBox(width: 10,), Text(model.getSource()) ],),
+                    SizedBox(width: 10,), SizedBox( width: width *.4,child: Text(model.getSource(), overflow: TextOverflow.ellipsis,))]),
                   SizedBox(height: 10,),
                   Center(
                     child: SizedBox(width: width * .5, height: 70,

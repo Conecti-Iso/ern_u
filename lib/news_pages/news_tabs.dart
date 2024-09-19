@@ -1,6 +1,6 @@
-import 'package:ern_u/home_page/general_news.dart';
-import 'package:ern_u/home_page/sports_news.dart';
-import 'package:ern_u/home_page/technology_news.dart';
+import 'package:ern_u/news_pages/general_news.dart';
+import 'package:ern_u/news_pages/sports_news.dart';
+import 'package:ern_u/news_pages/technology_news.dart';
 import 'package:flutter/material.dart';
 
 class NewsTabs extends StatefulWidget {
