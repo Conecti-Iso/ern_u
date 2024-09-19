@@ -6,4 +6,6 @@ class ImagesPath {
   static String kOnboarding3 = 'assets/images/onBoarding3.png';
   static String kProfileImage = 'assets/images/profile-img.jpeg';
   static String kLogo = 'assets/images/UENR-logo.png';
+  static String kForgetPassword = 'assets/images/forget-p.PNG';
+  static String kHomeImage = 'assets/images/Looper-2.png';
 }
