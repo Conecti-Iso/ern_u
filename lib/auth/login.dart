@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_colors.dart';
 import '../constants/image_path.dart';
 import '../constants/primary_button.dart';
+import 'auth_widgets/forget_password.dart';
 import 'auth_widgets/password_test_field.dart';
 import 'auth_widgets/text_form_field.dart';
 import 'firebase_auth.dart';
@@ -132,6 +133,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       title: 'New User? ',
                       subtitle: 'create an Account ',
                       onTab: () => Get.to(const RegisterScreen()),
+                      subtitleTextStyle: GoogleFonts.acme(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.kWhite)
+                          .copyWith(
+                          color: AppColor.kGrayscaleDark100,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    CustomRichText(
+                      title: 'Lost password? ',
+                      subtitle: 'create a new one ',
+                      onTab: () => Get.to( ForgotPasswordPage()),
                       subtitleTextStyle: GoogleFonts.acme(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

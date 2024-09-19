@@ -74,29 +74,29 @@ class _HomePageState extends State<HomePage> {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                decoration: BoxDecoration(
-                  color: AppColor.kPrimary,
-                  borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildProfileSection(),
-                    SearchInput(
-                      textController: searchController,
-                      hintText: 'search', onChange: (value ) {
-                        setState(() {
-                          _searchQuery = value;
-                          print("Search query updated from onChanged: $_searchQuery");
-                        });
-                    },
-                    ),
-                  ],
+              decoration: BoxDecoration(
+                color: AppColor.kPrimary,
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
                 ),
               ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildProfileSection(),
+                  SearchInput(
+                    textController: searchController,
+                    hintText: 'search', onChange: (value ) {
+                      setState(() {
+                        _searchQuery = value;
+                        print("Search query updated from onChanged: $_searchQuery");
+                      });
+                  },
+                  ),
+                ],
+              ),
+                              ),
             ),
           ),
           SliverPadding(
