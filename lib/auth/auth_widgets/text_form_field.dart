@@ -43,50 +43,41 @@ class PrimaryTextFormField extends StatelessWidget {
     InputBorder errorBorder = InputBorder.none;
     InputBorder focusedBorder = InputBorder.none;
 
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-          borderRadius: borderRadius,
-          color: AppColor.kOnBoardingColor,
-          border: Border.all(color: AppColor.kOnBoardingColor)),
-      child: TextFormField(
-        // validator: validator,
-        controller: controller,
-        maxLines: maxLines,
-        keyboardType: keyboardType,
-        style: GoogleFonts.plusJakartaSans(
+    return TextFormField(
+      controller: controller,
+      maxLines: maxLines,
+      keyboardType: keyboardType,
+      style: GoogleFonts.plusJakartaSans(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: AppColor.kWhite)
+          .copyWith(
+        color: AppColor.kGrayscaleDark100,
+      ),
+      decoration: InputDecoration(
+        contentPadding:
+        const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+        filled: true,
+        hintText: hintText,
+        hintStyle: GoogleFonts.plusJakartaSans(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: AppColor.kWhite)
             .copyWith(
-          color: AppColor.kGrayscaleDark100,
-        ),
-        decoration: InputDecoration(
-          contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-          filled: true,
-          hintText: hintText,
-          hintStyle: GoogleFonts.plusJakartaSans(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: AppColor.kWhite)
-              .copyWith(
-              color: AppColor.kGrayscaleDark100,
-              fontWeight: FontWeight.w600,
-              fontSize: 14),
-          prefixIcon: prefixIcon,
-          prefixIconColor: prefixIconColor,
-          enabledBorder: enabledBorder,
-          focusedBorder: focusedBorder,
-          errorBorder: errorBorder,
-          focusedErrorBorder: focusedErrorBorder,
-          errorStyle: const TextStyle(height: 0),
-        ),
-        onChanged: onChanged,
-        inputFormatters: inputFormatters,
-        onTapOutside: onTapOutside,
+            color: Colors.grey,
+            fontWeight: FontWeight.w600,
+            fontSize: 14),
+        prefixIcon: prefixIcon,
+        prefixIconColor: prefixIconColor,
+        enabledBorder: enabledBorder,
+        focusedBorder: focusedBorder,
+        errorBorder: errorBorder,
+        focusedErrorBorder: focusedErrorBorder,
+        errorStyle: const TextStyle(height: 0),
       ),
+      onChanged: onChanged,
+      inputFormatters: inputFormatters,
+      onTapOutside: onTapOutside,
     );
   }
 }

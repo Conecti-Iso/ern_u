@@ -7,6 +7,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_colors.dart';
+import '../constants/image_path.dart';
 import '../constants/primary_button.dart';
 import 'auth_widgets/password_test_field.dart';
 import 'auth_widgets/text_form_field.dart';
@@ -20,7 +21,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailC = TextEditingController();
-
   TextEditingController passwordC = TextEditingController();
 
   bool isLoading = false;
@@ -34,16 +34,14 @@ class _LoginScreenState extends State<LoginScreen> {
         elevation: 0,
       ),
       body: Stack(
-        children: [SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: SizedBox(
-              width: 327,
-              height: 500,
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(ImagesPath.kLogo,height: 200),
                 Text(
                   'Login',
                   textAlign: TextAlign.center,
@@ -75,23 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Email',
-                      style: GoogleFonts.plusJakartaSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.kWhite)
-                          .copyWith(
-                          color: AppColor.kGrayscaleDark100,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14),
-                    ),
                     const SizedBox(height: 7),
                     PrimaryTextFormField(
                         borderRadius: BorderRadius.circular(24),
-                        hintText: 'abc@gmail.com',
+                        hintText: 'Email',
                         controller: emailC,
-                        width: 327,
+                        width: double.infinity,
                         height: 52
                     )
                   ],
@@ -100,23 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Password',
-                      style: GoogleFonts.plusJakartaSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.kWhite)
-                          .copyWith(
-                          color: AppColor.kGrayscaleDark100,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14),
-                    ),
                     const SizedBox(height: 8),
                     PasswordTextField(
                         borderRadius: BorderRadius.circular(24),
                         hintText: 'Password',
                         controller: passwordC,
-                        width: 327,
+                        width: double.infinity,
                         height: 52)
                   ],
                 ),
@@ -125,10 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     PrimaryButton(
                       elevation: 0,
-                      onTap: () {
+                      onTap: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
 
                         try{
-                          loginUser(
+                         await loginUser(
                               emailC.text,
                               passwordC.text,context
                           );
@@ -140,23 +119,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             isLoading = false;
                           });
                         }
-                        setState(() {
-                          isLoading = true;
-                        });
-
                       },
                       text: 'Log - in',
                       bgColor: AppColor.kPrimary,
                       borderRadius: 20,
                       height: 46,
-                      width: 327,
+                      width: double.infinity,
                       textColor: AppColor.kWhite,
                     ),
                     const SizedBox(height: 20),
                     CustomRichText(
                       title: 'New User? ',
                       subtitle: 'create an Account ',
-                      onTab: () => Get.to(RegisterScreen()),
+                      onTab: () => Get.to(const RegisterScreen()),
                       subtitleTextStyle: GoogleFonts.acme(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -164,14 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           .copyWith(
                           color: AppColor.kGrayscaleDark100,
                           fontWeight: FontWeight.w600,
-                          fontSize: 14),
+                          fontSize: 14
+                      ),
                     )
                   ],
                 ),
               ]),
             ),
           ),
-        ),
           if (isLoading)
             Container(
               color: Colors.black.withOpacity(0.5),

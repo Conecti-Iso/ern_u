@@ -1,20 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ern_u/constants/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
+import '../home_page/buttom_navigation.dart';
 import '../home_page/home_page.dart';
 import 'login.dart';
 
 
-Future<void> createAccount(String firstName, String lastName, String email, String password) async {
+Future<void> createAccount(
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+    String staffID,
+    String department,
+    String contact,
+    String role,
+    String imageUrl
 
 
-  if(firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty) {
+    ) async {
+  if(
+  firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty || staffID.isEmpty
+  || department.isEmpty || contact.isEmpty || role.isEmpty || imageUrl.isEmpty) {
     showCustomSnackbar(
       icon: Icons.error_outline_outlined,
       title: 'Validation Error',
@@ -40,9 +50,15 @@ Future<void> createAccount(String firstName, String lastName, String email, Stri
 
     // Add user details to Firestore
     await firestore.collection('users').doc(userCredential.user!.uid).set({
-      'name': firstName,
-      'phone': lastName,
+      'firstName': firstName,
+      'lastName': lastName,
       'email': email,
+      'staffID': staffID,
+      'department': department,
+      'contact': contact,
+      'role': role,
+      'userId': userCredential.user?.uid,
+      'profileImageUrl': imageUrl,
     });
 
 
@@ -169,7 +185,7 @@ Future<void> loginUser(String email, String password, BuildContext context) asyn
 
 
 
-    Get.off(const HomePage());
+    Get.off(const NavigationHome());
 
   } on FirebaseAuthException catch (e) {
 
