@@ -16,19 +16,19 @@ class OnBoarding {
 
 List<OnBoarding> onBoardinglist = [
   OnBoarding(
-    title: ' Can be accessed from anywhere at any time',
+    title: ' Hands on desk, create your world!',
     image: ImagesPath.kOnboarding1,
     description:
-    'The essential language learning tools and resources you need to seamlessly transition into mastering a new language',
+    'Hands on desk, create your world',
   ),
   OnBoarding(
-      title: 'Offers a dynamic and interactive experience',
+      title: 'Love what you do',
       image: ImagesPath.kOnboarding2,
       description:
-      'Engaging features including test, story telling, and conversations that motivate and inspire language learners to unlock their full potential'),
+      'love what you do'),
   OnBoarding(
-      title: "Experience the Premium Features with Our App",
+      title: "Administrators it's your Time",
       image: ImagesPath.kOnboarding3,
       description:
-      'Updated TalkGpt with premium materials and a dedicated following, providing language learners with immersive content for effective learning'),
+      "Administrators it's your time"),
 ];

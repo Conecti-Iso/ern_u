@@ -41,6 +41,8 @@ dependencies:
   firebase_core:
   firebase_auth:
   cloud_firestore:
+  image_picker:
+  firebase_storage:
   url_launcher: ^6.3.0
 
 dev_dependencies:
