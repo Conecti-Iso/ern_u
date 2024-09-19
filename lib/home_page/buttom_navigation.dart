@@ -1,6 +1,7 @@
 import 'package:ern_u/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'edit_user_profile.dart';
 import 'home_page.dart';
 
 class NavigationHome extends StatefulWidget {
@@ -14,7 +15,7 @@ class _NavigationHomeState extends State<NavigationHome> {
   int currentIndex = 0;
   List<Widget> screens = [
     HomePage(),
-    // MyOrders(),
+    const EditProfilePage(),
   ];
 
   @override
