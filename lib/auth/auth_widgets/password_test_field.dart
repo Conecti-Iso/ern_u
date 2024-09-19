@@ -54,8 +54,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureText
-                    ? Icons.visibility_outlined
-                    : Icons.visibility_off_outlined,
+                    ? Icons. visibility_off_outlined
+                    : Icons.visibility_outlined,
                 color: AppColor.kGrayscaleDark100,
                 size: 17,
               ),
