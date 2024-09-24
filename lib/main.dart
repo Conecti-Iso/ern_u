@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'firebase_options.dart';
+import 'news_pages/news_tabs.dart';
 import 'onbording_screens/introduction_screen.dart';
 
 
