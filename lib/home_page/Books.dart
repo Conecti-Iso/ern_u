@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/books_screen.dart';
+
 class Books extends StatefulWidget {
   const Books({super.key});
 
@@ -14,7 +16,10 @@ class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        toolbarHeight: 0,
         bottom: TabBar(
+          unselectedLabelStyle: const TextStyle(color: Colors.black),
+          labelStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
           controller: _tabController,
           tabs: const [
             Tab(
@@ -28,7 +33,7 @@ class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
       body: TabBarView(
         controller: _tabController,
         children: const [
-          Center(child: Text("Books")),
+          BooksScreen(),
           Center(child: Text("Memos")),
         ],
       ),
