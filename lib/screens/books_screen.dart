@@ -36,7 +36,26 @@ class _BooksScreenState extends State<BooksScreen> {
 
   bookCard(BookModel book, BuildContext c) {
     return Card(
-      child: Text(book.title ?? "Empty Title"),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: InkWell(
+          onTap: () {},
+          child: Row(
+            children: [
+              Image.asset("assets/images/pdf-bg.png"),
+              const SizedBox(width: 10,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(book.title ?? "Empty Title", style: const TextStyle(fontWeight: FontWeight.bold),),
+                  const SizedBox(height: 10,),
+                  const Text("pdf")
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
