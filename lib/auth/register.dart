@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../constants/app_colors.dart';
@@ -45,7 +44,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
 
         // Upload image to Firebase Storage
-        final storageRef = FirebaseStorage.instance.ref().child('profile_images/${DateTime.now().millisecondsSinceEpoch}');
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('profile_images/${DateTime.now().millisecondsSinceEpoch}');
         final uploadTask = storageRef.putFile(_image!);
         final snapshot = await uploadTask.whenComplete(() {});
 
@@ -65,7 +66,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   String? selectedRole = 'senior member?';
-  final List<String> roleOptions = ['senior member?', 'Senior Member', 'Senior Staff'];
+  final List<String> roleOptions = [
+    'senior member?',
+    'Senior Member',
+    'Senior Staff'
+  ];
 
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
@@ -83,21 +88,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title:
-            Text(
-              'Create Account',
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: AppColor.kGrayscaleDark100,
-              ),
-            ),
-
+        title: Text(
+          'Create Account',
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: AppColor.kGrayscaleDark100,
+          ),
+        ),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          Stepper(
+      body: Stack(children: [
+        Stepper(
           type: StepperType.horizontal,
           currentStep: _currentStep,
           onStepContinue: () async {
@@ -122,9 +124,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     _imageUrl!
                 );
               } catch (e) {
-                // Handle errors
                 Get.snackbar(
-                    'Error', 'Failed to create account: $e');
+                    'Error', 'Please check and upload a profile image');
               } finally {
                 setState(() {
                   isLoading = false;
@@ -146,14 +147,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   if (_currentStep > 0)
                     TextButton(
                       onPressed: details.onStepCancel,
-                      child:  Text('<< Back', style: TextStyle(color: AppColor.kPrimary)),
+                      child: Text('<< Back',
+                          style: TextStyle(color: AppColor.kPrimary)),
                     ),
                   const SizedBox(width: 12),
                   ElevatedButton(
                     onPressed: details.onStepContinue,
-                    style: ElevatedButton.styleFrom(backgroundColor: AppColor.kPrimary),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.kPrimary),
                     child: Text(_currentStep < 1 ? 'Next' : 'Submit',
-                      style: const TextStyle(color: Colors.white)),
+                        style: const TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
@@ -162,10 +165,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           steps: [
             Step(
               stepStyle: StepStyle(
-                errorColor: Colors.red,
-                color: AppColor.kPrimary,
-                connectorColor: Colors.green
-              ),
+                  errorColor: Colors.red,
+                  color: AppColor.kPrimary,
+                  connectorColor: Colors.green),
               title: const Text('Personal'),
               content: Column(
                 children: [
@@ -176,7 +178,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Expanded(
                         child: PrimaryTextFormField(
                           borderRadius: BorderRadius.circular(5),
-                          hintText: 'First Name',height: 50, width: 100,
+                          hintText: 'First Name',
+                          height: 50,
+                          width: 100,
                           controller: firstName,
                           keyboardType: TextInputType.text,
                         ),
@@ -187,7 +191,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(5),
                           hintText: 'Last Name',
                           keyboardType: TextInputType.text,
-                          controller: lastName,height: 50, width: 100,
+                          controller: lastName,
+                          height: 50,
+                          width: 100,
                         ),
                       ),
                     ],
@@ -199,98 +205,100 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       keyboardType: TextInputType.emailAddress,
                       controller: emailC,
                       width: double.infinity,
-                      height: 52
-                  ),
+                      height: 52),
                   const SizedBox(height: 10),
                   PasswordTextField(
                       borderRadius: BorderRadius.circular(24),
                       hintText: 'Password',
                       controller: passwordC,
                       width: double.infinity,
-                      height: 52
-                  )
+                      height: 52)
                 ],
               ),
               isActive: _currentStep >= 0,
             ),
             Step(
-              stepStyle: StepStyle(
-                  errorColor: Colors.red,
-                  color: AppColor.kPrimary,
-                  connectorColor: Colors.green
-              ),
-              title: const Text('Work'),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  PrimaryTextFormField(
-                    borderRadius: BorderRadius.circular(12),
-                    hintText: 'Staff ID',
-                    controller: staffIDC,height: 50, width: double.infinity,
-                  ),
-                  const SizedBox(height: 20),
-                  PrimaryTextFormField(
-                    keyboardType: TextInputType.text,
-                    borderRadius: BorderRadius.circular(12),
-                    hintText: 'Department/Section/Units',
-                    controller: departmentC,height: 50, width: double.infinity,
-                  ),
-                  const SizedBox(height: 20),
-
-                  PrimaryTextFormField(
-                    borderRadius: BorderRadius.circular(12),
-                    hintText: 'Phone',
-                    keyboardType: TextInputType.phone,
-                    controller: contactC,height: 50, width: double.infinity,
-                  ),
-                  // _buildRoleDropdown(),
-                  const SizedBox(height: 20),
-
-                  PrimaryTextFormField(
-                    borderRadius: BorderRadius.circular(50),
-                    keyboardType: TextInputType.text,
-                    hintText: 'Rank',
-                    controller: roleC,
-                    height: 50,
-                    width: double.infinity,
-                  ),
-                  const Text("Please Tell Us Your Rank. Eg: senior member or senior staff"
-                      , style: TextStyle(fontSize: 10)),
-
-                  const SizedBox(height: 20),
-                  Center(
-                    child: CustomRichText(
-                      title: 'Already have an account? ',
-                      subtitle: '  Log In',
-                      onTab: () => Get.to(LoginScreen()),
-                      subtitleTextStyle: GoogleFonts.acme(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.kWhite)
-                          .copyWith(
-                          color: AppColor.kGrayscaleDark100,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10
-                      ),
+                stepStyle: StepStyle(
+                    errorColor: Colors.red,
+                    color: AppColor.kPrimary,
+                    connectorColor: Colors.green),
+                title: const Text('Work'),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PrimaryTextFormField(
+                      borderRadius: BorderRadius.circular(12),
+                      hintText: 'Staff ID',
+                      controller: staffIDC,
+                      height: 50,
+                      width: double.infinity,
                     ),
-                  )
+                    const SizedBox(height: 20),
+                    PrimaryTextFormField(
+                      keyboardType: TextInputType.text,
+                      borderRadius: BorderRadius.circular(12),
+                      hintText: 'Department/Section/Units',
+                      controller: departmentC,
+                      height: 50,
+                      width: double.infinity,
+                    ),
+                    const SizedBox(height: 20),
 
-                ],
-              ),
-              isActive: _currentStep >= 1)
+                    PrimaryTextFormField(
+                      borderRadius: BorderRadius.circular(12),
+                      hintText: 'Phone',
+                      keyboardType: TextInputType.phone,
+                      controller: contactC,
+                      height: 50,
+                      width: double.infinity,
+                    ),
+                    // _buildRoleDropdown(),
+                    const SizedBox(height: 20),
+
+                    PrimaryTextFormField(
+                      borderRadius: BorderRadius.circular(50),
+                      keyboardType: TextInputType.text,
+                      hintText: 'Rank',
+                      controller: roleC,
+                      height: 50,
+                      width: double.infinity,
+                    ),
+                    const Text(
+                        "Please Tell Us Your Rank. Eg: senior member or senior staff",
+                        style: TextStyle(fontSize: 10)),
+
+                    const SizedBox(height: 20),
+                    Center(
+                      child: CustomRichText(
+                        title: 'Already have an account? ',
+                        subtitle: '  Log In',
+                        onTab: () => Get.to(LoginScreen()),
+                        subtitleTextStyle: GoogleFonts.acme(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.kWhite)
+                            .copyWith(
+                                color: AppColor.kGrayscaleDark100,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 10),
+                      ),
+                    )
+                  ],
+                ),
+                isActive: _currentStep >= 1)
           ],
         ),
-          if (isLoading)
-            Container(
-              color: Colors.black.withOpacity(0.5),
-              child:
-              const Center(child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Card(child: Center(child: CircularProgressIndicator())))),
-            ),
-      ]
-      ),
+        if (isLoading)
+          Container(
+            color: Colors.black.withOpacity(0.5),
+            child: const Center(
+                child: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Card(
+                        child: Center(child: CircularProgressIndicator())))),
+          ),
+      ]),
     );
   }
 
@@ -298,59 +306,60 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Center(
       child: _image == null
           ? Stack(
-        children: [
-          CircleAvatar(
-            backgroundImage: AssetImage(ImagesPath.kProfileImage),
-            radius: 50,
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: AppColor.kPrimary,
-                shape: BoxShape.circle,
-              ),
-              child: GestureDetector(
-                onTap: getImage,
-                child: const Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                  size: 16,
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage(ImagesPath.kProfileImage),
+                  radius: 50,
                 ),
-              ),
-            ),
-          ),
-        ],
-      )
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: AppColor.kPrimary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: GestureDetector(
+                      onTap: getImage,
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
           : Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.file(_image!, fit: BoxFit.cover, width: 100, height: 100),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: AppColor.kPrimary,
-                shape: BoxShape.circle,
-              ),
-              child: GestureDetector(
-                onTap: getImage,
-                child: const Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                  size: 16,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.file(_image!,
+                      fit: BoxFit.cover, width: 100, height: 100),
                 ),
-              ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: AppColor.kPrimary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: GestureDetector(
+                      onTap: getImage,
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 

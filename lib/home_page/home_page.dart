@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ern_u/home_page/update_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -162,17 +163,50 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+
   Widget _buildProfileSection() {
     return Padding(
       padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
       child: Row(
         children: [
-          CircleAvatar(
-            backgroundImage: _userImageUrl != null
-                ? NetworkImage(_userImageUrl!)
-                : AssetImage(ImagesPath.kProfileImage) as ImageProvider,
-            radius: 40,
+      //     CircleAvatar(
+      //       backgroundImage: _userImageUrl != null
+      //           // ? NetworkImage(_userImageUrl!)
+      // ? CachedNetworkImage(
+      // imageUrl: _userImageUrl!,
+      //   fit: BoxFit.cover,
+      //   width: double.infinity,
+      //   placeholder: (context, url) =>
+      //   const Center(child: CircularProgressIndicator()),
+      //   errorWidget: (context, url, error) => const Icon(Icons.error),
+      // )
+      //           : AssetImage(ImagesPath.kProfileImage) as ImageProvider,
+      //       radius: 40,
+      //     ),
+
+          // CircleAvatar(
+          //   backgroundImage: _userImageUrl != null
+          //       ? CachedNetworkImageProvider(
+          //       _userImageUrl!,
+          //
+          //   )
+          //       : AssetImage(ImagesPath.kProfileImage) as ImageProvider,
+          //   radius: 40,
+          // ),
+
+          ClipOval(
+            child: CachedNetworkImage(
+              imageUrl: _userImageUrl!,
+              fit: BoxFit.cover,
+              width: 80,  // Set width/height as per your requirement
+              height: 80,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
+
+
           const SizedBox(width: 15),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,12 +278,22 @@ class _HomePageState extends State<HomePage> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              data['profileImageUrl'] ?? ImagesPath.kProfileImage,
-              width: 100,
-              height: 100,
+            child:
+            CachedNetworkImage(
+              imageUrl:data['profileImageUrl'] ?? ImagesPath.kProfileImage,
               fit: BoxFit.cover,
+              width: 100,  // Set width/height as per your requirement
+              height: 100,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
+
+            // Image.network(
+            //   data['profileImageUrl'] ?? ImagesPath.kProfileImage,
+            //   width: 100,
+            //   height: 100,
+            //   fit: BoxFit.cover,
+            // ),
           ),
           Expanded(
             child: Padding(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'memos.dart';
+
 class Books extends StatefulWidget {
   const Books({super.key});
 
@@ -8,7 +10,7 @@ class Books extends StatefulWidget {
 }
 
 class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
-  late final _tabController = TabController(length: 3, vsync: this);
+  late final _tabController = TabController(length: 2, vsync: this);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +29,9 @@ class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          Center(child: Text("Books")),
-          Center(child: Text("Memos")),
+        children: [
+          const Center(child: Text("Books")),
+          MemoListScreen(),
         ],
       ),
     );

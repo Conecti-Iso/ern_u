@@ -2,7 +2,7 @@ import 'package:ern_u/constants/app_colors.dart';
 import 'package:ern_u/news_pages/news_tabs.dart';
 import 'package:flutter/material.dart';
 
-import 'Books.dart';
+import 'Books/Books.dart';
 import 'edit_user_profile.dart';
 import 'home_page.dart';
 
@@ -50,9 +50,9 @@ class _NavigationHomeState extends State<NavigationHome> {
                       color: Colors.blue.withOpacity(0.2), // Circle color
                     ),
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.home, color: AppColor.kPrimary),
+                    child: const Icon(Icons.home, color: Colors.blue),
                   )
-                : const Icon(Icons.home),
+                : const Icon(Icons.home, color:  Colors.blue),
             label: 'Admins',
           ),
 
