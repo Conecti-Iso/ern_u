@@ -14,8 +14,10 @@ class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFFEEEEEE),
         toolbarHeight: 0,
         bottom: TabBar(
           unselectedLabelStyle: const TextStyle(color: Colors.black),

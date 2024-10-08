@@ -15,11 +15,14 @@ class _NewsTabsState extends State<NewsTabs> {
   Widget build(BuildContext context) {
     return DefaultTabController(length: 3, child: Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xFFEEEEEE),
+        automaticallyImplyLeading: false,
         title: const Text("News", style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(30),
             child: TabBar(
+              padding: const EdgeInsets.only(bottom: 10),
               unselectedLabelStyle: const TextStyle(fontSize: 14),
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius. circular(40),
@@ -27,7 +30,7 @@ class _NewsTabsState extends State<NewsTabs> {
                 splashBorderRadius: BorderRadius. circular(40),
               dividerColor: Colors.transparent,
               indicatorSize: TabBarIndicatorSize.label,
-              labelStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              labelStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
                 tabs: const [
               Text("General"),
               Text("Sports"),

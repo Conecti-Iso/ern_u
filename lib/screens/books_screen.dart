@@ -41,6 +41,7 @@ class _BooksScreenState extends State<BooksScreen> {
 
   bookCard(BookModel book, BuildContext c) {
     return Card(
+      color: Colors.white,
       elevation: 0,
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -71,6 +72,7 @@ class _BooksScreenState extends State<BooksScreen> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+        backgroundColor: const Color(0xFFEEEEEE),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Icon(Icons.add),
