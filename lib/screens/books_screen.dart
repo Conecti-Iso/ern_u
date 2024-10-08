@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ern_u/models/book_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'book_details.dart';
+
 
 class BooksScreen extends StatefulWidget {
   const BooksScreen({super.key});
@@ -18,6 +22,7 @@ class _BooksScreenState extends State<BooksScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
+                padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
                 shrinkWrap: true,
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
@@ -36,13 +41,16 @@ class _BooksScreenState extends State<BooksScreen> {
 
   bookCard(BookModel book, BuildContext c) {
     return Card(
+      elevation: 0,
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.to(()=> BookDetails(book: book,));
+          },
           child: Row(
             children: [
-              Image.asset("assets/images/pdf-bg.png"),
+              Image.asset("assets/images/pdf-bg.png", height: 40,),
               const SizedBox(width: 10,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,9 +70,15 @@ class _BooksScreenState extends State<BooksScreen> {
 
   @override
   Widget build(BuildContext context) {
-      return SingleChildScrollView(
-        child: Center(
-          child: getAllBooks(context)
+      return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+              child: getAllBooks(context)
+          ),
         ),
       );
   }
