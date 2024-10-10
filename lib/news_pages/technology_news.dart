@@ -29,6 +29,7 @@ class _TechnologyNewsState extends State<TechnologyNews> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+        backgroundColor: const Color(0xFFEEEEEE),
         body: FutureBuilder<List<NewsModel>>(
             future: news,
             builder: (context, snapshot) {

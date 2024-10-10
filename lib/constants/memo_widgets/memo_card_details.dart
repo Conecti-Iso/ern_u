@@ -1,11 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../home_page/Books/PDFs_screen.dart';
+import '../../home_page/Books/memo_details.dart';
 import '../../models/memo_model.dart';
+import '../../screens/book_details.dart';
 import '../app_colors.dart';
 import 'package:http/http.dart' as http;
 
@@ -62,7 +66,7 @@ class MemoDetailScreen extends StatelessWidget {
             const SizedBox(height: 16),
             const Text('Description:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            Text(memo.memoDescription, style: TextStyle(fontSize: 16)),
+            Text(memo.memoDescription, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 24),
             // ElevatedButton.icon(
             //   icon: Icon(Icons.picture_as_pdf),
@@ -73,14 +77,8 @@ class MemoDetailScreen extends StatelessWidget {
             ElevatedButton.icon(
               icon: Icon(Icons.attachment,color: AppColor.kWhite,),
               label: Text('View Attached Memo',style: TextStyle(color: AppColor.kWhite),),
-              onPressed: () async {
-                if (await canLaunch(memo.memoFileUrl)) {
-                  await launch(memo.memoFileUrl);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Could not open the file')),
-                  );
-                }
+              onPressed: () {
+                Get.to(()=> MemoDetails(memo: memo,));
               },
               style: ElevatedButton.styleFrom(backgroundColor: AppColor.kPrimary),
             ),
