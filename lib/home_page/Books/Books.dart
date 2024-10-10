@@ -1,3 +1,5 @@
+import 'package:ern_u/home_page/Books/memos.dart';
+import 'package:ern_u/home_page/Books/my_memos.dart';
 import 'package:ern_u/screens/books_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +38,7 @@ class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
         controller: _tabController,
         children: const [
           BooksScreen(),
-          Center(child: Text("Memos")),
+          MemoListScreen(),
         ],
       ),
     );
