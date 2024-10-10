@@ -9,7 +9,7 @@ import '../constants/image_path.dart';
 class UserDetailPage extends StatelessWidget {
   final String userId;
 
-  const UserDetailPage({Key? key, required this.userId}) : super(key: key);
+  const UserDetailPage({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
