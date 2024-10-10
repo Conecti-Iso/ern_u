@@ -30,6 +30,7 @@ dependencies:
 #  flutter_pdfview:
 #  http:
 #  path_provider:
+  syncfusion_flutter_pdfviewer: ^27.1.51
 
 dev_dependencies:
   flutter_test:

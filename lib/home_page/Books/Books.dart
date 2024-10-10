@@ -1,6 +1,8 @@
+import 'package:ern_u/home_page/Books/memos.dart';
+import 'package:ern_u/home_page/Books/my_memos.dart';
+import 'package:ern_u/screens/books_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'memos.dart';
 
 class Books extends StatefulWidget {
   const Books({super.key});
@@ -10,13 +12,18 @@ class Books extends StatefulWidget {
 }
 
 class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
-  late final _tabController = TabController(length: 2, vsync: this);
+  late final _tabController = TabController(length: 3, vsync: this);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFFEEEEEE),
+        toolbarHeight: 0,
         bottom: TabBar(
+          unselectedLabelStyle: const TextStyle(color: Colors.black),
+          labelStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
           controller: _tabController,
           tabs: const [
             Tab(
@@ -29,8 +36,8 @@ class _BooksState extends State<Books> with SingleTickerProviderStateMixin{
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          const Center(child: Text("Books")),
+        children: const [
+          BooksScreen(),
           MemoListScreen(),
         ],
       ),
