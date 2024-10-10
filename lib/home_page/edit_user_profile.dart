@@ -309,13 +309,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Profile updated successfully')),
+          const SnackBar(content: Text('Profile updated successfully')),
         );
       }
     } catch (e) {
       print('Error updating profile: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update profile')),
+        const SnackBar(content: Text('Failed to update profile')),
       );
     }
     setState(() => _isLoading = false);
@@ -353,7 +353,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         elevation: 0,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -362,7 +362,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               height: 200,
               decoration: BoxDecoration(
                 color: AppColor.kPrimary,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30),
                 ),
@@ -379,7 +379,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ? FileImage(_imageFile!) as ImageProvider
                           : (_currentImageUrl != null
                           ? NetworkImage(_currentImageUrl!)
-                          : AssetImage('assets/default_profile.png')) as ImageProvider,
+                          : const AssetImage('assets/default_profile.png')) as ImageProvider,
                     ),
                   ),
                 ),
@@ -394,20 +394,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   _buildTextField(_staffIDController, 'Staff ID', Icons.badge),
                   _buildTextField(_roleController, 'Role', Icons.work),
                   _buildTextField(_departmentController, 'Department', Icons.business),
-                  _buildTextField(_emailController, 'Email', Icons.email),
+                  // _buildTextField(_emailController, 'Email', Icons.email),
                   _buildTextField(_contactController, 'Contact', Icons.phone),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _updateProfile,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                      child: Text('Update Profile', style: TextStyle(fontSize: 18)),
-                    ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white, backgroundColor: AppColor.kPrimary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                      child: Text('Update Profile', style: TextStyle(fontSize: 18)),
                     ),
                   ),
                 ],

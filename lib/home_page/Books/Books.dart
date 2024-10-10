@@ -1,6 +1,6 @@
+import 'package:ern_u/screens/books_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/books_screen.dart';
 
 class Books extends StatefulWidget {
   const Books({super.key});

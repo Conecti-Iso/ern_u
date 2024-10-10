@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ern_u/constants/app_colors.dart';
+
+import '../constants/image_path.dart';
 
 class UserDetailPage extends StatelessWidget {
   final String userId;
@@ -15,13 +18,13 @@ class UserDetailPage extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('users').doc(userId).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (!snapshot.hasData || !snapshot.data!.exists) {
-            return Center(child: Text('User not found'));
+            return const Center(child: Text('User not found'));
           }
 
           Map<String, dynamic> userData = snapshot.data!.data() as Map<String, dynamic>;
@@ -33,16 +36,29 @@ class UserDetailPage extends StatelessWidget {
                 floating: false,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    userData['profileImageUrl'] ?? 'https://via.placeholder.com/400x200',
+                  background:
+                  CachedNetworkImage(
+                    // imageUrl: data['profileImageUrl'] ?? ImagesPath.kProfileImage,
+                    imageUrl: userData['profileImageUrl'] ?? ImagesPath.kProfileImage,
                     fit: BoxFit.cover,
+                    width: 100,  // Set width/height as per your requirement
+                    height: 100,
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
+
+                  // Image.network(
+                  //   userData['profileImageUrl'] ?? 'https://via.placeholder.com/400x200',
+                  //   fit: BoxFit.cover,
+                  // ),
+
+
                 ),
                 backgroundColor: AppColor.kPrimary,
               ),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -54,7 +70,7 @@ class UserDetailPage extends StatelessWidget {
                           color: AppColor.kPrimary,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         userData['role'] ?? 'N/A',
                         style: GoogleFonts.poppins(
@@ -62,7 +78,7 @@ class UserDetailPage extends StatelessWidget {
                           color: Colors.grey[600],
                         ),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       _buildInfoCard(userData),
                     ],
                   ),
@@ -80,7 +96,7 @@ class UserDetailPage extends StatelessWidget {
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             _buildInfoRow(Icons.badge, 'Staff ID', userData['staffID'] ?? 'N/A'),
@@ -99,7 +115,7 @@ class UserDetailPage extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon, color: AppColor.kPrimary),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +128,7 @@ class UserDetailPage extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   value,
                   style: GoogleFonts.poppins(
