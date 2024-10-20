@@ -26,6 +26,7 @@ class MemoService {
         viewCount: 0,
         status: 'not viewed',
         createdBy: user.uid,
+        createdAt: DateTime.now()
 
       ).toMap();
 
@@ -37,6 +38,7 @@ class MemoService {
     }
   }
 
+  /// get memos created
   Stream<List<Memo>> getMemos() {
     return _firestore.collection('memos').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) => Memo.fromMap(doc.data(), doc.id)).toList();
@@ -44,18 +46,24 @@ class MemoService {
   }
 
 
+  /// increment memo
   Future<void> incrementViewCount(String memoId) async {
-    // await _memosCollection.doc(memoId).update({
-    await _firestore.doc(memoId).update({
-      'viewCount': FieldValue.increment(1),
-    });
+    try {
+      await _firestore.collection('memos').doc(memoId).update({
+        'viewCount': FieldValue.increment(1),
+      });
+    } catch (e) {
+      print("Failed to increment view count: $e");
+    }
   }
 
 
+  /// update memo status
   Future<void> updateMemoStatus(String memoId, String status) async {
     await _firestore.collection('memos').doc(memoId).update({'status': status});
   }
 
+  /// get memos for self
   Stream<List<Memo>> getMyMemos() {
     final user = _auth.currentUser;
     if (user == null) return Stream.value([]);
@@ -69,6 +77,7 @@ class MemoService {
     });
   }
 
+  /// delete memo for self
   Future<void> deleteMemo(String memoId) async {
     try {
       final user = _auth.currentUser;
@@ -82,6 +91,7 @@ class MemoService {
   }
 
 
+  /// update memo for self
   Future<void> updateMemo({
     required String memoId,
     required String memoTitle,
@@ -103,5 +113,9 @@ class MemoService {
       print('Error updating memo: $e');
       throw e;
     }
+  }
+
+  Future<DocumentSnapshot> getMemoById(String memoId) {
+    return _firestore.collection('memos').doc(memoId).get();
   }
 }
