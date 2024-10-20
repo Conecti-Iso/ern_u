@@ -29,7 +29,6 @@ class Memo {
       'status': status,
       'createdBy': createdBy,
       'viewCount': viewCount,
-
     };
   }
 
