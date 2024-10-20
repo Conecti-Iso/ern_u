@@ -7,6 +7,7 @@ class Memo {
   final String status;
   final String createdBy;
   final int viewCount;
+  final DateTime createdAt;
 
 
   Memo({
@@ -18,6 +19,7 @@ class Memo {
     required this.status,
     required this.createdBy,
     this.viewCount = 0,
+    required this.createdAt
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +31,7 @@ class Memo {
       'status': status,
       'createdBy': createdBy,
       'viewCount': viewCount,
+      'createdAt' : createdAt.toIso8601String()
 
     };
   }
@@ -43,6 +46,7 @@ class Memo {
       status: map['status'] ?? 'not viewed',
       createdBy: map['createdBy'] ?? '',
       viewCount: map['viewCount'] ?? 0,
+      createdAt: DateTime.parse(map['createdAt'])
     );
   }
 }

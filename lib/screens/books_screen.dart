@@ -73,10 +73,10 @@ class _BooksScreenState extends State<BooksScreen> {
   Widget build(BuildContext context) {
       return Scaffold(
         backgroundColor: const Color(0xFFEEEEEE),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {},
+        //   child: const Icon(Icons.add),
+        // ),
         body: SingleChildScrollView(
           child: Center(
               child: getAllBooks(context)

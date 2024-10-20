@@ -17,7 +17,7 @@ class MemoListScreen extends StatefulWidget {
 
 class _MemoListScreenState extends State<MemoListScreen> {
   final MemoService _memoService = MemoService();
-  // late final MemoService memoService;
+
   final _formKey = GlobalKey<FormState>();
   String _memoTitle = '';
   String _from = '';
@@ -59,6 +59,8 @@ class _MemoListScreenState extends State<MemoListScreen> {
             return const Center(child: Text('No memos found'));
           }
           return ListView.builder(
+            padding: const EdgeInsets.all(16),
+
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final memo = snapshot.data![index];
@@ -72,6 +74,7 @@ class _MemoListScreenState extends State<MemoListScreen> {
                     ),
                   );
                 },
+                isVC: false,
               );
             },
           );

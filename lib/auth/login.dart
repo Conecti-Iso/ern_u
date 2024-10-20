@@ -15,6 +15,8 @@ import 'auth_widgets/text_form_field.dart';
 import 'firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -28,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
     return Scaffold(
       backgroundColor: AppColor.kWhite,
       appBar: AppBar(
@@ -42,30 +46,30 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(ImagesPath.kLogo,height: 200),
+                    Image.asset(ImagesPath.kLogo,height: isTablet ? 300 : 200),
                 Text(
                   'Login',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.actor(
-                    fontSize: 20,
+                    fontSize: isTablet ? 28 : 20,
                     fontWeight: FontWeight.w600,
                   ).copyWith(
                       color: AppColor.kGrayscaleDark100,
                       fontWeight: FontWeight.w600,
-                      fontSize: 24),
+                      fontSize: isTablet ? 24 : 28),
                 ),
                 const SizedBox(height: 15),
                 Text(
                   'We happy to see you again.',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.aBeeZee(
-                      fontSize: 14,
+                      fontSize: isTablet ? 16 : 14,
                       fontWeight: FontWeight.w500,
                       color: AppColor.kWhite)
                       .copyWith(
                       color: AppColor.kGrayscale40,
                       fontWeight: FontWeight.w600,
-                      fontSize: 14),
+                      fontSize: isTablet ? 16 : 14,),
                 ),
 
                 const SizedBox(
@@ -80,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Email',
                         controller: emailC,
                         width: double.infinity,
-                        height: 52
+                        height: isTablet ? 60 : 52,
                     )
                   ],
                 ),
@@ -94,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Password',
                         controller: passwordC,
                         width: double.infinity,
-                        height: 52)
+                        height: isTablet ? 60 : 52)
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -134,20 +138,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       subtitle: 'create an Account ',
                       onTab: () => Get.to(const RegisterScreen()),
                       subtitleTextStyle: GoogleFonts.acme(
-                          fontSize: 14,
+                          fontSize: isTablet ? 16 : 14,
                           fontWeight: FontWeight.w500,
                           color: AppColor.kWhite)
                           .copyWith(
                           color: AppColor.kGrayscaleDark100,
                           fontWeight: FontWeight.w600,
-                          fontSize: 14
+                          fontSize: isTablet ? 16 : 14,
                       ),
                     ),
                     const SizedBox(height: 20),
                     CustomRichText(
                       title: 'Lost password? ',
                       subtitle: 'create a new one ',
-                      onTab: () => Get.to( ForgotPasswordPage()),
+                      onTab: () => Get.to( const ForgotPasswordPage()),
                       subtitleTextStyle: GoogleFonts.acme(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

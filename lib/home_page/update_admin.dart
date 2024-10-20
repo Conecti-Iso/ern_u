@@ -38,21 +38,13 @@ class UserDetailPage extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   background:
                   CachedNetworkImage(
-                    // imageUrl: data['profileImageUrl'] ?? ImagesPath.kProfileImage,
                     imageUrl: userData['profileImageUrl'] ?? ImagesPath.kProfileImage,
                     fit: BoxFit.cover,
                     width: 100,  // Set width/height as per your requirement
                     height: 100,
-                    placeholder: (context, url) => const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
                   ),
-
-                  // Image.network(
-                  //   userData['profileImageUrl'] ?? 'https://via.placeholder.com/400x200',
-                  //   fit: BoxFit.cover,
-                  // ),
-
-
                 ),
                 backgroundColor: AppColor.kPrimary,
               ),

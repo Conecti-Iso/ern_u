@@ -3,7 +3,6 @@ import 'package:ern_u/home_page/update_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ern_u/constants/app_colors.dart';
@@ -11,7 +10,7 @@ import 'package:ern_u/constants/custom_search.dart';
 import 'package:ern_u/constants/image_path.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -24,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   String _userName = '';
   String _userRole = '';
-  String? _userImageUrl;
+  String _userImageUrl = '';
   String _searchQuery = '';
 
   @override
@@ -44,19 +43,19 @@ class _HomePageState extends State<HomePage> {
   void _onSearchChanged() {
     setState(() {
       _searchQuery = searchController.text;
-      print("Search query updated: $_searchQuery"); // Debug print
     });
   }
 
   Future<void> _loadUserData() async {
     User? user = _auth.currentUser;
     if (user != null) {
-      DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
+      DocumentSnapshot userDoc = await
+      _firestore.collection('users').doc(user.uid).get();
       if (userDoc.exists) {
         setState(() {
           _userName = userDoc['firstName'] + ' ' + userDoc['lastName'];
           _userRole = userDoc['role'] ?? 'User';
-          _userImageUrl = userDoc['profileImageUrl'];
+          _userImageUrl = userDoc['profileImageUrl'] ?? '';
         });
       }
     }
@@ -91,13 +90,12 @@ class _HomePageState extends State<HomePage> {
                     hintText: 'search', onChange: (value ) {
                       setState(() {
                         _searchQuery = value;
-                        print("Search query updated from onChanged: $_searchQuery");
                       });
                   },
                   ),
                 ],
               ),
-                              ),
+              ),
             ),
           ),
           SliverPadding(
@@ -124,11 +122,8 @@ class _HomePageState extends State<HomePage> {
                 List<DocumentSnapshot> filteredDocs = snapshot.data!.docs.where((doc) {
                   final userData = doc.data() as Map<String, dynamic>;
                   final fullName = '${userData['firstName']} ${userData['lastName']} '.toLowerCase();
-                  // return fullName.contains(_searchQuery.toLowerCase());
                   return _searchQuery.isEmpty || fullName.contains(_searchQuery.toLowerCase());
                 }).toList();
-
-                // Check if there are no matching search results
                 if (filteredDocs.isEmpty) {
                   return const SliverToBoxAdapter(
                     child: Center(
@@ -144,9 +139,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 }
-
-
-
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                         (context, index) => InkWell(
@@ -170,36 +162,12 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
       child: Row(
         children: [
-      //     CircleAvatar(
-      //       backgroundImage: _userImageUrl != null
-      //           // ? NetworkImage(_userImageUrl!)
-      // ? CachedNetworkImage(
-      // imageUrl: _userImageUrl!,
-      //   fit: BoxFit.cover,
-      //   width: double.infinity,
-      //   placeholder: (context, url) =>
-      //   const Center(child: CircularProgressIndicator()),
-      //   errorWidget: (context, url, error) => const Icon(Icons.error),
-      // )
-      //           : AssetImage(ImagesPath.kProfileImage) as ImageProvider,
-      //       radius: 40,
-      //     ),
-
-          // CircleAvatar(
-          //   backgroundImage: _userImageUrl != null
-          //       ? CachedNetworkImageProvider(
-          //       _userImageUrl!,
-          //
-          //   )
-          //       : AssetImage(ImagesPath.kProfileImage) as ImageProvider,
-          //   radius: 40,
-          // ),
 
           ClipOval(
             child: CachedNetworkImage(
-              imageUrl: _userImageUrl!,
+              imageUrl: _userImageUrl,
               fit: BoxFit.cover,
-              width: 80,  // Set width/height as per your requirement
+              width: 80,
               height: 80,
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -287,13 +255,6 @@ class _HomePageState extends State<HomePage> {
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-
-            // Image.network(
-            //   data['profileImageUrl'] ?? ImagesPath.kProfileImage,
-            //   width: 100,
-            //   height: 100,
-            //   fit: BoxFit.cover,
-            // ),
           ),
           Expanded(
             child: Padding(

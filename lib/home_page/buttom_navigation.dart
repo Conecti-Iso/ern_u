@@ -1,4 +1,3 @@
-import 'package:ern_u/constants/app_colors.dart';
 import 'package:ern_u/news_pages/news_tabs.dart';
 import 'package:flutter/material.dart';
 

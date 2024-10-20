@@ -83,6 +83,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = screenWidth > 600;
     return Scaffold(
       backgroundColor: AppColor.kWhite,
       appBar: AppBar(
@@ -91,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: Text(
           'Create Account',
           style: GoogleFonts.plusJakartaSans(
-            fontSize: 20,
+            fontSize: isTablet ? 28 : 20,
             fontWeight: FontWeight.w600,
             color: AppColor.kGrayscaleDark100,
           ),
@@ -124,8 +126,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     _imageUrl!
                 );
               } catch (e) {
-                Get.snackbar(
-                    'Error', 'Please check and upload a profile image');
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  // duration: Duration(seconds: 300),
+                  content: Text("Error: Please start by uploading a profile image"),
+                ));
               } finally {
                 setState(() {
                   isLoading = false;

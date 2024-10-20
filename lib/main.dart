@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'constants/app_colors.dart';
 import 'firebase_options.dart';
+import 'home_page/vc_memo_list.dart';
 import 'onbording_screens/introduction_screen.dart';
 
 
@@ -23,11 +25,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Ern u',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.kPrimary,),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
       home:   const OnBoardingScreen(),
+      // home:   const VCMemList(),
     );
   }
 }
