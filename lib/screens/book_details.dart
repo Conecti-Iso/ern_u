@@ -11,6 +11,8 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
+  bool _isLoading = true; // Track loading state
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,12 +20,27 @@ class _BookDetailsState extends State<BookDetails> {
         title: Text(widget.book.title ?? ""),
         centerTitle: true,
       ),
-      body: SfPdfViewer.network(widget.book.bookUrl ?? "")
+      body: Stack(
+        children: [
+          SfPdfViewer.network(
+            widget.book.bookUrl ?? "",
+            onDocumentLoaded: (details) {
+              setState(() {
+                _isLoading = false; // PDF loaded successfully
+              });
+            },
+            onDocumentLoadFailed: (details) {
+              setState(() {
+                _isLoading = false; // Stop loading if an error occurs
+              });
+            },
+          ),
+          if (_isLoading)
+            Center(
+              child: CircularProgressIndicator(), // Show loading indicator
+            ),
+        ],
+      ),
     );
   }
 }
-
-
-
-
-
