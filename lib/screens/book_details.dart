@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ern_u/models/book_model.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class BookDetails extends StatefulWidget {
@@ -30,13 +32,14 @@ class _BookDetailsState extends State<BookDetails> {
               });
             },
             onDocumentLoadFailed: (details) {
+              Get.snackbar("Error", "could not load pdf");
               setState(() {
                 _isLoading = false; // Stop loading if an error occurs
               });
             },
           ),
           if (_isLoading)
-            Center(
+            const Center(
               child: CircularProgressIndicator(), // Show loading indicator
             ),
         ],
