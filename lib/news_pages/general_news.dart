@@ -20,7 +20,7 @@ class _GeneralNewsState extends State<GeneralNews> {
   @override
   void initState() {
     // TODO: implement initState
-    news = NewsService().fetchGeneralNews();
+    news = NewsService().fetchNews();
     super.initState();
   }
 
@@ -39,6 +39,7 @@ class _GeneralNewsState extends State<GeneralNews> {
               } else if (snapshot.hasData) {
                 return ListView.builder(
                     itemCount: snapshot.data!.length,
+                    reverse: true,
                     itemBuilder: (context, index) {
                       final newsItem = (snapshot).data![index];
                       return newsCard(newsItem, width);
