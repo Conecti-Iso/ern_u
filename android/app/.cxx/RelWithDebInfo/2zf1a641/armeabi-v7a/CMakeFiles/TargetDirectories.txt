@@ -1,0 +1,2 @@
+C:/Users/05455/OneDrive/Desktop/ern_u/ern_u/android/app/.cxx/RelWithDebInfo/2zf1a641/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/05455/OneDrive/Desktop/ern_u/ern_u/android/app/.cxx/RelWithDebInfo/2zf1a641/armeabi-v7a/CMakeFiles/rebuild_cache.dir
