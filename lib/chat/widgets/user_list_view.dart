@@ -10,8 +10,7 @@ class UserListView extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     ChatViewModel chatViewModel = Get.put(ChatViewModel());
-    return  Container(
-      color: Colors.red,
+    return  Container( 
       margin: const EdgeInsets.only(bottom: 20, top: 20),
       width: double.infinity,
       height: height * .1,
@@ -28,9 +27,7 @@ class UserListView extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GestureDetector(
-                  onTap: () {
-                    // Handle user tap
-                  },
+                  onTap: () => chatViewModel.openChatroom(user),
                   child: Column(
                     children: [
                       CircleAvatar(
