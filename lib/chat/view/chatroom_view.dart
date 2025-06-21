@@ -39,6 +39,8 @@ class _ChatRoomViewState extends State<ChatRoomView> {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
 
+    _controller.clear();
+
     final message = {
       'text': text,
       'senderId': _currentUserId,
@@ -55,8 +57,6 @@ class _ChatRoomViewState extends State<ChatRoomView> {
       'lastMessage': text,
       'lastUpdated': FieldValue.serverTimestamp(),
     });
-
-    _controller.clear();
   }
 
   @override
