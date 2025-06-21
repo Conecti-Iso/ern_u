@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ern_u/chat/viewmodel/chat_view_model.dart';
+import 'package:ern_u/chat/widgets/user_tile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -44,33 +45,11 @@ class _ChatViewState extends State<ChatView> {
               child: Text("Messages"),
             ),
 
-            Container(
-              width: width,
-              height: height * .08,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              color: Colors.red,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.grey[300],
-                    backgroundImage: NetworkImage("imageUrl"),
-                  ),
+            UserTile(),
 
-                  Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Title"),
-                          Text("Title")
-                        ],
-                      )
-                  )
-                ],
-              ),
-            ),
+            UserTile(),
+
+            UserTile(),
 
 
           ],
