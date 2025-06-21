@@ -319,6 +319,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../chat/view/chat_view.dart';
 import 'update_admin.dart';
 
 class HomePage extends StatefulWidget {
@@ -371,6 +372,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
+      floatingActionButton: _buildFloatingActionButton(),
       body: CustomScrollView(
         slivers: [
           _buildAppBar(),
@@ -378,6 +380,15 @@ class _HomePageState extends State<HomePage> {
           _buildUsersList(),
         ],
       ),
+    );
+  }
+
+  FloatingActionButton _buildFloatingActionButton() {
+    return FloatingActionButton(
+        child: const Icon(Icons.chat_bubble),
+        onPressed: () {
+          Get.to(() => const ChatView());
+        }
     );
   }
 
