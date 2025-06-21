@@ -32,7 +32,7 @@ class _NewsTabsState extends State<NewsTabs> {
               indicatorSize: TabBarIndicatorSize.label,
               labelStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
                 tabs: const [
-              Text("General"),
+              Text("UENR"),
               Text("Sports"),
               Text("Technology")
             ])
