@@ -10,6 +10,7 @@ class ChatViewModel extends GetxController {
   final RxList<Map<String, dynamic>> users = <Map<String, dynamic>>[].obs;
   var authUser = <String, dynamic>{}.obs;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  String userId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void onInit() {
@@ -48,5 +49,11 @@ class ChatViewModel extends GetxController {
     }
   }
 
+  Stream<QuerySnapshot> getChatRoomsStream(String userId) {
+    return FirebaseFirestore.instance
+        .collection('chats')
+        .where('users', arrayContains: userId)
+        .snapshots();
+  }
 
 }
